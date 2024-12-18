@@ -1,0 +1,160 @@
+<div class="container">
+    <!-- Sidebar with user search and user list -->
+    <div class="sidebar">
+        <br><br><br>
+        <button class="chat-button" (click)="NewChat()">
+            <i class="fas fa-comment-dots"></i> Create New Chat
+        </button>
+        <br><br><br>  
+        
+
+        <div class="user-list"> 
+            <div class="user" *ngFor="let chat of chats">
+                <!-- Avatar Container -->
+                <div class="user-avatar-container" (click)="select(chat._id)">
+                    <img src="Tchatter.jpg" class="user-avatar"> 
+                </div>
+        
+                <!-- User Info -->
+                <div class="user-info" (click)="select(chat._id)">
+                    <h3>{{chat.chatname}}</h3>
+                </div>
+        
+               
+                <div class="dropdown-container">
+                    <button class="dropdown-button" (click)="toggleDropdown(chat._id)">
+                        ⋮ <!-- Three dots icon -->
+                    </button>
+                    <ul class="dropdown-menu" *ngIf="dropdownVisible === chat._id">
+                        <li class="editname" (click)="editChat(chat.chatname, chat._id)">
+                            <i class="fas fa-edit"></i> &nbsp;&nbsp;&nbsp; Name
+                        </li>
+                        <li class="deletechat" (click)="confirmDelete(chat.chatname, chat._id)">
+                            <i class="fas fa-trash"></i> &nbsp;&nbsp;&nbsp; Delete
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>
+        
+
+
+    </div>
+    
+
+    <!-- Chat container with improved navbar -->
+    <div class="chat-container" *ngIf="selectedUser != null; else convFound">
+        <div class="chat-header">
+            <div class="user-info">
+                <div>
+                    <div class="user-status">
+                        <h2>{{selectedUser.chatname}}</h2>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-messages">       
+
+            
+        <div>
+
+                    <div class="message" *ngFor="let message of selectedUser.messages"
+                    [ngClass]="{'received': message.sender != 'user', 'sent': message.sender == 'user'}"
+                    (click)="selectedMessage = selectedMessage === message ? null : message"  (mouseleave)="selectedMessage = ''">
+                        <div class="message-content"  >
+                            <button *ngIf="message.sender != 'user'"class="copy-button"  (click)="copyToClipboard(message.content)"><i class="fas fa-copy"></i> </button>
+                            <br *ngIf="message.sender != 'user'"><br *ngIf="message.sender != 'user'">
+                            <div class="formatted-content" >{{ message.content }}</div>
+                            
+                            <span class="timestamp"
+                            [ngClass]="{'timestamp-right': message.sender == 'user', 
+                                        'timestamp-left': message.sender != 'user'}"
+                            *ngIf="selectedMessage === message">{{message.date}}<br>{{message.time}} 
+                        </span>
+                        </div>
+ 
+                    </div>
+
+                    <div *ngIf="isLoadingIA">
+                        <div class="chat-bubble-IA">
+                            <div class="typing">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+
+
+       
+ 
+ 
+       
+
+   
+        </div>
+   
+        <div class="chat-input" >
+            <!-- Attach Button -->
+ 
+            <!-- Emoji Button -->
+            <button class="record-btn" (click)="toggleEmojiPicker()">
+                <i class="fas fa-smile"></i>
+            </button>
+        
+            <!-- File Input -->
+            <input type="file" id="file-input" (change)="onFileSelected($event)" style="display:none;">
+        
+            <!-- Text Message Input -->
+            <input 
+                   type="text" 
+                   placeholder="Type a message" 
+                   [(ngModel)]="newMessage" 
+                    
+                   (keydown.enter)="sendMessage()" 
+                   class="chat-input-msg">
+          
+            <!-- Image Preview -->
+ 
+        
+            <!-- Emoji Picker Dropdown -->
+            <div *ngIf="isEmojiPickerVisible" class="emoji-picker">
+                <!-- Category Tabs -->
+                <div class="emoji-categories">
+                    <button *ngFor="let category of emojiCategories" 
+                            (click)="selectCategory(category)" 
+                            class="category-btn">
+                            &nbsp;&nbsp;&nbsp;{{ category }}&nbsp;&nbsp;&nbsp;
+                    </button>
+                </div>
+        <br>
+                <!-- Emoji Grid -->
+                <div class="emoji-grid">
+                    <div *ngFor="let emoji of emojis[selectedCategory]" 
+                         class="emoji" 
+                         (click)="addEmoji(emoji)">
+                        {{ emoji }}
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Send Button -->
+            <button class="send-btn" (click)="sendMessage()">Send</button>
+        </div>
+        
+          
+
+
+ 
+    </div>
+
+    <ng-template #convFound>
+        <div class="convertationNullcen">  <img  class="convertationNull" src="vide.jpg" alt="Logo"> </div>
+        <p  class="convertationNulltxt" >No convertation with ToutBot</p>
+     </ng-template>
+
+</div>

@@ -1,0 +1,303 @@
+<div class="container">
+    <!-- Sidebar with user search and user list -->
+    <div class="sidebar">
+        <div class="search-bar">
+            <i *ngIf="showIcon" class="fas fa-arrow-left text-sm ms-1" (click)="hideIcon()"></i> &nbsp;
+            <input type="text" placeholder="Search users..." [(ngModel)]="searchTerm" (input)="onInputChange()" (keydown.enter)="onEnterPressed()">
+        </div>
+        
+
+        <div class="user-list" *ngIf="isSidebarVisible"> 
+
+ 
+            <div class="user" *ngFor="let user of filteredProblems">
+                <div class="user-avatar-container" (click)="select(user.user.id)">
+                    <img [src]="user.user.photoProfile" class="user-avatar">
+                    <span *ngIf="user.user.active" class="status-indicator"></span> 
+                </div>
+                <div class="user-info" (click)="select(user.user.id)">
+                    <h4>{{user.user.name}}</h4>
+    
+                    <div *ngIf="user.user.otherTyping ; else nonTyping">
+                        <div class="chat-bubble">
+                            <div class="typing">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+            <ng-template #nonTyping>
+                <div *ngIf="user.conversation.lastMessage.message ; else img"  > 
+                    
+                        <div *ngIf="user.conversation.lastMessage.senderId != user.user.id ; else him1">
+                            <p>
+                                You: {{truncateMessage(user.conversation.lastMessage.message)}} 
+                                <img [src]="user.user.photoProfile" class="user-vu" *ngIf="user.user.otherVu">
+                            </p>
+                        </div>
+                    
+                    
+
+
+                    
+                    <ng-template #him1>
+                         <p *ngIf="user.user.meVu ; else notvu">
+                            {{truncateMessage(user.conversation.lastMessage.message)}} 
+                         </p>
+                         <ng-template #notvu>
+                            <p class="notvu">
+                                {{truncateMessage(user.conversation.lastMessage.message)}} 
+                             </p>
+                         </ng-template>
+                    </ng-template>
+
+                </div> 
+
+
+                <ng-template #img>
+ 
+                        <div *ngIf="user.conversation.lastMessage.senderId != user.user.id ; else him2">
+                            <p>
+                                You send a photo
+                                <img [src]="user.user.photoProfile" class="user-vu" *ngIf="user.user.otherVu">
+                            </p>
+                        </div>
+   
+                    
+
+
+                    
+                    <ng-template #him2>
+                         <p *ngIf="user.user.meVu ; else notvu">
+                            {{user.user.name}} send a photo
+                         </p>
+                         <ng-template #notvu>
+                            <p class="notvu">
+                                Send a photo
+                             </p>
+                         </ng-template>
+                    </ng-template>
+                </ng-template>
+            </ng-template>
+                </div>
+            </div>
+            
+        </div> 
+    
+
+        <div class="user-list" *ngIf="!isSidebarVisible">
+            <ng-container *ngFor="let user of filteredProblems">
+                <div class="user" *ngIf="user.user.active"> <!-- Check if user is active -->
+                    <div class="user-avatar-container">
+                        <img [src]="user.user.photoProfile" class="user-avatar">
+                    </div>
+                    <div class="user-info2" (click)="select(user.user.id)">
+                        <h4>{{user.user.name}}</h4>
+                        <span class="status-indicator2"></span> <!-- Status indicator after the name -->
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        
+        
+        
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+        <nav class="navbar">
+            <a  class="icon-link" (click)="ConvView()">
+                <i class="fas fa-comments"></i>  
+            </a>
+            <a  class="icon-link right-icon" (click)="ActivView()">
+                <i class="fas fa-user-friends"></i>  
+            </a>
+        </nav>
+    </div>
+    
+
+    <!-- Chat container with improved navbar -->
+    <div class="chat-container" *ngIf="selectedUser != null; else convFound">
+        <div class="chat-header">
+            <div class="user-info">
+                <img [src]="selectedUser.photoProfile" alt="{{selectedUser.name}}" class="chat-header-avatar">
+                <div>
+                    <div class="user-status">
+                        <h4>{{selectedUser.name}}</h4>
+                        <span *ngIf="selectedUser.active" class="status-indicator-chat"></span> 
+                    </div>
+
+                    <h6>{{selectedUser.countryCode}}{{selectedUser.phone}}</h6>
+                </div>
+            </div>
+            <div class="chat-actions">
+                <button *ngIf="selectedUser.id!= 'ToutBot'" class="call-btn"><i class="fas fa-phone-alt"></i></button>
+                <button *ngIf="selectedUser.id!= 'ToutBot'" class="video-btn"><i class="fas fa-video"></i></button>
+            </div>
+        </div>
+
+        <div class="chat-messages">       
+            
+            
+            <div class="chat-bubble_inConv " *ngIf="selectedUser.typing">
+                <div class="typing">
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                </div>
+            </div>
+
+
+            
+
+        <div *ngIf=" selectedUser.id!= 'ToutBot'; else chatIA">
+                <div class="message" *ngFor="let message of messages.reverse()"
+                    [ngClass]="{'received': message.senderId == selectedUser.id, 'sent': message.senderId != selectedUser.id}"
+                    (click)="selectedMessage = selectedMessage === message ? null : message"  (mouseleave)="selectedMessage = ''">
+                <div class="message-content" *ngIf="message.message; else media">
+                    <p>{{message.message}}</p>
+                    
+                    <span class="timestamp"
+                        [ngClass]="{'timestamp-right': message.senderId == selectedUser.id, 
+                                    'timestamp-left': message.senderId != selectedUser.id}"
+                        *ngIf="selectedMessage === message">{{message.date}}<br>{{message.time}} 
+                    </span>
+                </div>
+
+                <ng-template #media>
+                        <div class="message-content">
+                            <img [src]="message.mediaUrl" class="img-mediaUrl" (click)="showimg(message.mediaUrl)">
+                            
+                            <span class="timestamp"
+                            [ngClass]="{'timestamp-right': message.senderId == selectedUser.id, 
+                                        'timestamp-left': message.senderId != selectedUser.id}"
+                            *ngIf="selectedMessage === message">{{message.date}}<br>{{message.time}} 
+                            </span>
+                        </div>
+                    </ng-template>
+               </div>
+        </div>
+        <ng-template #chatIA>
+                    <div *ngIf="isLoadingIA">
+                        <div class="chat-bubble-IA">
+                            <div class="typing">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="message" *ngFor="let message of messagesIA.reverse()"
+                    [ngClass]="{'received': message.role != 'user', 'sent': message.role == 'user'}"
+                     >
+                        <div class="message-content"  >
+                            <button *ngIf="message.role != 'user'"class="copy-button"  (click)="copyToClipboard(message.content)"><i class="fas fa-copy"></i> </button>
+                            <br *ngIf="message.role != 'user'"><br *ngIf="message.role != 'user'">
+                            <div class="formatted-content" >{{ message.content }}</div>
+                        </div>
+ 
+                    </div>
+
+        </ng-template>
+
+
+       
+       <div *ngIf="hasMoreMessages &&  selectedUser.id!= 'ToutBot'  ; else noMore" >
+        <button class="more-btn" (click)="MoreMessages()"> <i class="fas fa-chevron-up"></i>       </button>
+       </div>
+       <ng-template #noMore>
+        <br><br><br><br> <br><br> <img src="img4.png" alt="Logo" class="noMoreMsg" *ngIf="selectedUser.name != 'ToutBot'" >  
+
+       </ng-template>
+       
+
+   
+        </div>
+   
+        <div class="chat-input" *ngIf="selectedUser.id !== 'ToutBot'; else TchatterSend">
+            <!-- Attach Button -->
+            <button class="attach-btn" (click)="onAttachClick()">
+                <i class="fas fa-paperclip"></i>
+            </button>
+        
+            <!-- Microphone Button -->
+            <button class="record-btn" (click)="onRecordClick()">
+                <i class="fas fa-microphone"></i>
+            </button>
+        
+            <!-- Emoji Button -->
+            <button class="record-btn" (click)="toggleEmojiPicker()">
+                <i class="fas fa-smile"></i>
+            </button>
+        
+            <!-- File Input -->
+            <input type="file" id="file-input" (change)="onFileSelected($event)" style="display:none;">
+        
+            <!-- Text Message Input -->
+            <input *ngIf="!Mypath; else sendimg" 
+                   type="text" 
+                   placeholder="Type a message" 
+                   [(ngModel)]="newMessage" 
+                   (input)="typing()"  
+                   (keydown.enter)="sendMessage()" 
+                   class="chat-input-msg">
+          
+            <!-- Image Preview -->
+            <ng-template #sendimg>
+                <div class="input-container">
+                    <img [src]="url + Mypath" alt="Image" class="input-image">
+                    <i class="cancel-icon" (click)="removeImage()">&#10006;</i>
+                </div>
+                <input readOnly="true" 
+                       type="text" 
+                       placeholder="Send photo" 
+                       [(ngModel)]="newMessage" 
+                       (input)="typing()" 
+                       (keydown.enter)="sendMessage()" 
+                       class="chat-input-img">
+            </ng-template>
+        
+            <!-- Emoji Picker Dropdown -->
+            <div *ngIf="isEmojiPickerVisible" class="emoji-picker">
+                <!-- Category Tabs -->
+                <div class="emoji-categories">
+                    <button *ngFor="let category of emojiCategories" 
+                            (click)="selectCategory(category)" 
+                            class="category-btn">
+                            &nbsp;&nbsp;&nbsp;{{ category }}&nbsp;&nbsp;&nbsp;
+                    </button>
+                </div>
+        <br>
+                <!-- Emoji Grid -->
+                <div class="emoji-grid">
+                    <div *ngFor="let emoji of emojis[selectedCategory]" 
+                         class="emoji" 
+                         (click)="addEmoji(emoji)">
+                        {{ emoji }}
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Send Button -->
+            <button class="send-btn" (click)="sendMessage()">Send</button>
+        </div>
+        
+          
+
+
+        <ng-template #TchatterSend >
+            <div class="chat-input">
+            <input    type="text" placeholder="Type a message" [(ngModel)]="newMessage"  (keydown.enter)="sendMessage()" class="chat-input-msg">
+            <button class="send-btn" (click)="sendMessage()">Send</button>
+        </div>
+        </ng-template>
+    </div>
+
+    <ng-template #convFound>
+            <div class="convertationNullcen">   <img class="convertationNull" src="convertationNull.gif" alt="Logo"> </div>
+            <!--  <div class="convertationNull">   <img src="img1.webp" alt="Logo"> </div>  -->
+    </ng-template>
+
+</div>

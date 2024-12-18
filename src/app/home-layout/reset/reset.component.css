@@ -1,0 +1,91 @@
+.profile-container {
+    width: 65vh;  
+    height: 56vh;  
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;  
+    position: fixed;  
+    top: 50%;  
+    left: 50%;  
+    transform: translate(-50%, -50%); 
+    z-index: 1000;  
+    overflow: hidden;  
+}
+
+.blocq {
+    font-size: 5em; 
+    position: relative;
+    left: 10px;
+    top: 60px;
+  }
+
+  .editPwd{
+    position: relative;
+    top: -20%;
+}
+
+
+
+.input-group-dynamic .form-control {
+    border: none;
+    border-bottom: 2px solid #ccc;
+    border-radius: 0;
+    font-size: 1.1rem; /* Increased font size */
+
+    padding: 0.5rem 0; /* Increased padding for a larger input field */
+    box-shadow: none;
+    transition: border-color 0.3s ease;
+}
+
+.input-group-dynamic .form-control:focus {
+    border-color: #800080; /* Purple color for the bottom border when focused */
+    outline: none;
+}
+
+.input-group-dynamic .form-control::placeholder {
+    color: #aaa; /* Placeholder color */
+    opacity: 1; /* Ensure placeholder is visible */
+    font-size: 1rem; /* Adjust placeholder font size */
+}
+
+.input-group-dynamic .form-control:focus::placeholder {
+    color: #800080; /* Placeholder color when focused */
+}
+
+.profile-info {
+    font-family: Arial, sans-serif;
+    color: #333;
+    text-align: center; /* Center align text */
+    margin: 20px 0;
+    flex: 1; /* Allow this section to grow and center vertically */
+}
+
+
+.profile-info button:hover {
+    background-color: #800080; /* Darker shade of the button color */
+    transform: scale(1.05); /* Slightly increase the size on hover */
+}
+
+.profile-info button:focus {
+    outline: none; /* Remove the default focus outline */
+    box-shadow: 0 0 5px #17a2b8; /* Add a custom focus shadow */
+}
+
+
+.profile-info button {
+    font-family: Arial, sans-serif;
+    background-color: #800080dc; /* Bootstrap text-info color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+    margin-bottom: 10px; /* Space below the button */
+}

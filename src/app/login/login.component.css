@@ -1,0 +1,580 @@
+
+
+.main {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+  }
+  
+  
+
+.container {
+    width: 90%;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    text-align: center;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-group select {
+    margin-top: -10px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    margin-right: -1px; /* To align with the input field */
+    flex: 0 0 100px; /* Fixed width for country code dropdown */
+}
+
+.input-group input {
+    flex: 1; /* Fill remaining space */
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+}
+
+.logo-container {
+    width: 80px; /* Set the width of the container */
+    height: 80px; /* Set the height of the container */
+    overflow: hidden; /* Hide any overflow */
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+
+.logo {
+    width: 100%; /* Make image width 100% of its container */
+    height: 100%; /* Make image height 100% of its container */
+    object-fit: contain; /* Scale the image to fit within the container */
+}
+
+#forgot-password-link{
+    color: #800080;
+    cursor: pointer;
+}
+.form-header h1 {
+    margin: 0;
+    font-size: 28px;
+    color: #800080;
+}
+
+.form-header p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #666;
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+}
+
+button {
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #800080; /* Dark blue */
+    color: #fff;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #660066; /* Darker blue */
+}
+
+.hidden {
+    display: none;
+}
+
+#register-link {
+    background-color: #f0f0f0;
+    color: #800080; /* Dark blue */
+    border: 1px solid #ddd;
+}
+
+#register-link:hover {
+    background-color: #e0e0e0;
+}
+
+#verify-btn, #register-btn {
+    background-color: #800080a8; /* Bright cyan */
+}
+
+#verify-btn:hover, #register-btn:hover {
+    background-color: #660066; /* Darker cyan */
+}
+
+.return-to-login {
+    background-color: #800080; /* Dark blue */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.return-to-login:hover {
+    background-color: #660066; /* Darker blue */
+}
+
+/* Animated Background */
+.animation-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+    background: #efd1fd81;
+    /*efd1fdb2*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    position: absolute;
+    font-size: 3rem;
+    opacity: 0.7;
+}
+
+/* Existing Icons */
+.phone {
+    animation: movePhone 20s infinite linear, rotatePhone 30s infinite linear;
+    left: 5%;
+    bottom: 10%;
+    color: #800080; /* Dark blue */
+}
+
+.chat-bubble {
+    animation: moveBubble 15s infinite linear, rotateBubble 25s infinite linear;
+    right: 15%;
+    top: 30%;
+    color: #00c6ff; /* Bright cyan */
+}
+
+.message-icon {
+    animation: floatMessage 18s infinite ease-in-out;
+}
+
+.message1 {
+    left: 30%;
+    bottom: 25%;
+    animation: moveMessage1 10s infinite linear;
+    color: #34c759; /* Green */
+}
+
+.message2 {
+    right: 20%;
+    top: 50%;
+    animation: moveMessage2 12s infinite linear;
+    color: #ff5b5b; /* Red */
+}
+
+.call {
+    animation: moveCall 25s infinite linear, rotateCall 35s infinite linear;
+    left: 25%;
+    bottom: 20%;
+    color: #ff9900; /* Orange */
+}
+
+.video {
+    animation: moveVideo 22s infinite linear, rotateVideo 28s infinite linear;
+    right: 25%;
+    top: 20%;
+    color: #ff6600; /* Dark orange */
+}
+
+.attachment {
+    animation: floatAttachment 30s infinite ease-in-out;
+    left: 10%;
+    top: 40%;
+    color: #00cc99; /* Teal */
+}
+
+.emoticon {
+    animation: floatEmoticon 28s infinite ease-in-out;
+    right: 10%;
+    bottom: 35%;
+    color: #ffcc00; /* Yellow */
+}
+
+.notification {
+    animation: bounceNotification 20s infinite ease-in-out;
+    left: 40%;
+    top: 10%;
+    color: #ff0000; /* Red */
+}
+
+.setting {
+    animation: rotateSetting 18s infinite linear;
+    right: 15%;
+    bottom: 15%;
+    color: #66ccff; /* Light blue */
+}
+
+.search {
+    animation: moveSearch 20s infinite linear;
+    left: 50%;
+    top: 20%;
+    color: #00ccff; /* Light cyan */
+}
+
+.star {
+    animation: pulseStar 15s infinite ease-in-out;
+    right: 10%;
+    top: 40%;
+    color: #ffccff; /* Light pink */
+}
+
+.heart {
+    animation: heartbeatHeart 18s infinite ease-in-out;
+    left: 20%;
+    top: 50%;
+    color: #ff66cc; /* Light pink */
+}
+
+.location {
+    animation: moveLocation 25s infinite linear;
+    right: 25%;
+    bottom: 25%;
+    color: #33cc33; /* Green */
+}
+
+.calendar {
+    animation: moveCalendar 30s infinite linear;
+    left: 35%;
+    top: 10%;
+    color: #cc66ff; /* Purple */
+}
+
+.camera {
+    animation: floatCamera 28s infinite ease-in-out;
+    right: 30%;
+    bottom: 20%;
+    color: #ffcc00; /* Yellow */
+}
+
+/* Additional Icons */
+.music {
+    animation: moveMusic 22s infinite linear;
+    top: 15%;
+    left: 10%;
+    color: #ff3399; /* Pink */
+}
+
+.shopping-cart {
+    animation: moveCart 25s infinite linear;
+    bottom: 15%;
+    right: 10%;
+    color: #33ccff; /* Light cyan */
+}
+
+.video-camera {
+    animation: moveVideoCamera 30s infinite linear;
+    top: 30%;
+    left: 50%;
+    color: #ff6600; /* Dark orange */
+}
+
+.clock {
+    animation: rotateClock 18s infinite linear;
+    bottom: 30%;
+    left: 20%;
+    color: #ffcc00; /* Yellow */
+}
+
+.gift {
+    animation: floatGift 20s infinite ease-in-out;
+    top: 25%;
+    right: 20%;
+    color: #00cc99; /* Teal */
+}
+
+.moon {
+    animation: moveMoon 30s infinite linear;
+    bottom: 25%;
+    left: 40%;
+    color: #6666ff; /* Light blue */
+}
+
+.sun {
+    animation: rotateSun 25s infinite linear;
+    top: 20%;
+    right: 75%;
+    color: #ffcc00; /* Yellow */
+}
+
+.cloud {
+    animation: floatCloud 20s infinite ease-in-out;
+    top: 5%;
+    left: 30%;
+    color: #cccccc; /* Light gray */
+}
+
+.lightbulb {
+    animation: moveLightbulb 28s infinite linear;
+    bottom: 20%;
+    right: 30%;
+    color: #ffff66; /* Light yellow */
+}
+
+.coffee {
+    animation: moveCoffee 20s infinite linear;
+    top: 40%;
+    left: 15%;
+    color: #cc9966; /* Coffee brown */
+}
+
+@keyframes movePhone {
+    0% { transform: translateX(-100px) translateY(100px); }
+    100% { transform: translateX(100vw) translateY(-100px); }
+}
+
+@keyframes rotatePhone {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes moveBubble {
+    0% { transform: translateX(0) translateY(100vh); }
+    100% { transform: translateX(100vw) translateY(-100px); }
+}
+
+@keyframes rotateBubble {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-360deg); }
+}
+
+@keyframes floatMessage {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes moveMessage1 {
+    0% { transform: translateX(-100vw); }
+    100% { transform: translateX(100vw); }
+}
+
+@keyframes moveMessage2 {
+    0% { transform: translateX(100vw); }
+    100% { transform: translateX(-100vw); }
+}
+
+@keyframes moveCall {
+    0% { transform: translateY(100vh); }
+    100% { transform: translateY(-100px); }
+}
+
+@keyframes rotateCall {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-360deg); }
+}
+
+@keyframes moveVideo {
+    0% { transform: translateX(-100vw); }
+    100% { transform: translateX(100vw); }
+}
+
+@keyframes rotateVideo {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes floatAttachment {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes floatEmoticon {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes bounceNotification {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-30px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes rotateSetting {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes moveSearch {
+    0% { transform: translateX(-100vw); }
+    100% { transform: translateX(100vw); }
+}
+
+@keyframes pulseStar {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+@keyframes heartbeatHeart {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+@keyframes moveLocation {
+    0% { transform: translateX(-100vw); }
+    100% { transform: translateX(100vw); }
+}
+
+@keyframes moveCalendar {
+    0% { transform: translateY(100vh); }
+    100% { transform: translateY(-100px); }
+}
+
+@keyframes floatCamera {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes moveMusic {
+    0% { transform: translateX(-100vw); }
+    100% { transform: translateX(100vw); }
+}
+
+@keyframes moveCart {
+    0% { transform: translateY(100vh); }
+    100% { transform: translateY(-100px); }
+}
+
+@keyframes moveVideoCamera {
+    0% { transform: translateX(100vw); }
+    100% { transform: translateX(-100vw); }
+}
+
+@keyframes rotateClock {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-360deg); }
+}
+
+@keyframes floatGift {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes moveMoon {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100vw); }
+}
+
+@keyframes rotateSun {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes floatCloud {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes moveLightbulb {
+    0% { transform: translateX(-100vw); }
+    100% { transform: translateX(100vw); }
+}
+
+@keyframes moveCoffee {
+    0% { transform: translateY(100vh); }
+    100% { transform: translateY(-100px); }
+}
+
+.radio-options {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px; /* Spacing above the options */
+}
+
+.radio-option {
+    display: flex;
+    align-items: flex-start; /* Align items to the start of the flex container */
+    background-color: #f0f0f0; /* Background color for the label */
+    padding: 15px; /* Increased padding for a more paragraph-like feel */
+    border-radius: 5px; /* Rounded corners */
+    margin-bottom: 10px; /* Spacing between options */
+    cursor: pointer; /* Pointer cursor for better UX */
+    transition: background-color 0.3s; /* Smooth background color change */
+}
+
+.radio-option:hover {
+    background-color: #e0e0e0; /* Change background on hover */
+}
+
+.radio-label {
+    margin-left: 10px; /* Space between the radio button and text */
+    font-size: 1rem; /* Font size */
+    color: #333; /* Text color */
+    line-height: 1.5; /* Increase line height for better readability */
+    text-align: left; /* Ensure text is left-aligned */
+}
+
+.form-check-input {
+    width: 12px; /* Base width */
+    height: 12px; /* Base height */
+    appearance: none; 
+    background-color: #fff; 
+    border: 2px solid #800080; 
+    border-radius: 50%; 
+    outline: none; 
+    cursor: pointer; 
+    transition: background-color 0.3s, border-color 0.3s; 
+    transform: scale(0.6); /* Scale down the radio button */
+    position: relative;
+    top:25px
+}
+
+.form-check-input:checked {
+    background-color: #800080; 
+    border-color: #800080; 
+}
+
+.form-check-input:hover {
+    border-color: #5e005f; 
+}
+.emj-label{
+    font-size: 1.5em; 
+}

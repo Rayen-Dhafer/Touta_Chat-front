@@ -1,0 +1,215 @@
+/* Profile Container */
+
+
+.profile-container {
+    width: 65vh; /* Width based on viewport height */
+    height: 66vh; /* Height based on viewport height */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Space between elements */
+    position: fixed; /* Fixed position for overlay */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Offset by half of its own width and height */
+    z-index: 1000; /* Ensure it is on top */
+    overflow: hidden; /* Prevent overflow if content is larger */
+}
+
+/* Center avatar and profile info */
+.avatar-section {
+    margin-top: 20px; /* Space above the avatar section */
+}
+
+.avatar-container {
+    position: relative;
+    display: inline-block;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.custom-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: filter 0.3s ease;
+}
+
+.avatar-container:hover .custom-avatar-img {
+    filter: brightness(70%);
+}
+
+.custom-avatar-img2 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: filter 0.3s ease;
+}
+
+.camera-icon {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 24px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.avatar-container:hover .camera-icon {
+    opacity: 1;
+}
+
+/* Profile Info Styling */
+.profile-info {
+    font-family: Arial, sans-serif;
+    color: #333;
+    text-align: center; /* Center align text */
+    margin: 20px 0;
+    flex: 1; /* Allow this section to grow and center vertically */
+}
+
+/* User Info Styling */
+.user-name {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.user-mobile {
+    font-size: 18px;
+    color: #666;
+}
+
+/* Actions Styling */
+.profile-actions {
+    position: absolute; /* Absolute position within the container */
+    bottom: 20px; /* Space from the bottom */
+    left: 20px; /* Space from the left */
+    text-align: left; /* Align text to the left */
+}
+
+.profile-actions a {
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    color: #800080; /* Bootstrap text-info color */
+    text-decoration: none;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+    margin-bottom: 10px; /* Space between links */
+}
+
+.profile-actions a:hover {
+    scale: 1.1;
+    position: relative;
+    left: 5px;
+    color: #290229; /* Change color on hover */
+}
+
+.icon-move-right {
+    display: flex;
+    align-items: center;
+}
+
+.icon-move-right i {
+    margin-left: 8px;
+}
+
+.d-none {
+    display: none; /* Ensure the file input is hidden */
+}
+
+
+/* Save Button Styling */
+.profile-info button {
+    font-family: Arial, sans-serif;
+    background-color: #800080dc; /* Bootstrap text-info color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+    margin-bottom: 10px; /* Space below the button */
+}
+
+.profile-info button:hover {
+    background-color: #800080; /* Darker shade of the button color */
+    transform: scale(1.05); /* Slightly increase the size on hover */
+}
+
+.profile-info button:focus {
+    outline: none; /* Remove the default focus outline */
+    box-shadow: 0 0 5px #17a2b8; /* Add a custom focus shadow */
+}
+
+
+
+
+
+
+
+
+
+
+
+.input-group-dynamic {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.input-group-dynamic .form-control {
+    border: none;
+    border-bottom: 2px solid #ccc;
+    border-radius: 0;
+    font-size: 1.1rem; /* Increased font size */
+
+    padding: 0.5rem 0; /* Increased padding for a larger input field */
+    box-shadow: none;
+    transition: border-color 0.3s ease;
+}
+
+.input-group-dynamic .form-control:focus {
+    border-color: #800080; /* Purple color for the bottom border when focused */
+    outline: none;
+}
+
+.input-group-dynamic .form-control::placeholder {
+    color: #aaa; /* Placeholder color */
+    opacity: 1; /* Ensure placeholder is visible */
+    font-size: 1rem; /* Adjust placeholder font size */
+}
+
+.input-group-dynamic .form-control:focus::placeholder {
+    color: #800080; /* Placeholder color when focused */
+}
+
+
+.editPwd{
+    position: relative;
+    top: -25%;
+}
+
+.editEmail{
+    position: relative;
+    top: -40%;
+}
+
+.blocq {
+    font-size: 5em; 
+    position: relative;
+    left: 10px;
+    top: 60px;
+  }

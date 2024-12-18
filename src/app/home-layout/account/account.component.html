@@ -1,0 +1,119 @@
+ 
+<div class="profile-container"  *ngIf="!showInfo">
+    <div class="avatar-section">
+
+
+        <br><br><br><br>
+        <div class="avatar-container" *ngIf="user.name">
+            <img *ngIf="!editPP" [src]="user.photoProfile" class="custom-avatar-img2" alt="User Avatar">
+            <img *ngIf="editPP" [src]="url + user.photoProfile" class="custom-avatar-img2" alt="User Avatar">
+            
+        </div>
+
+    </div>
+    <br> 
+    <div class="profile-info" *ngIf="user.name">
+        <div class="user-name" >🪪 {{user.name}}</div><br>
+        <div class="user-mobile">📞 {{user.countryCode}} {{user.phone}}</div><br>
+
+        <div class="user-mobile" *ngIf="user.email" >📬 {{user.email}}</div>
+    </div>
+    <div class="profile-actions">
+
+        <a href="javascript:;" class="text-info icon-move-right"  (click)="ShowInfo()">Modify 
+          <i class="fas fa-arrow-right text-sm ms-1"></i>
+        </a>
+        <br>
+        <a href="javascript:;" class="text-info icon-move-right"  (click)="ShowEmail()">Email address 
+            <i class="fas fa-arrow-right text-sm ms-1"></i>
+          </a>
+        <br>
+        <a href="javascript:;" class="text-info icon-move-right"  (click)="ShowPwd()">Reset your password
+          <i class="fas fa-arrow-right text-sm ms-1"></i>
+        </a>
+    </div>
+</div>
+
+<div class="profile-container"  *ngIf="showInfo">
+    <div class="avatar-section">
+        <br><br><br><br>
+        <div class="avatar-container" *ngIf="user.name">
+            
+            <img *ngIf="!editPP" [src]="user.photoProfile" class="custom-avatar-img" alt="User Avatar">
+            <img *ngIf="editPP" [src]="url + user.photoProfile" class="custom-avatar-img" alt="User Avatar">
+            
+            <div class="camera-icon" (click)="triggerFileInput()">
+                <i class="fas fa-camera"></i>
+                <input type="file" id="fileInput" (change)="onFileSelected($event)" class="d-none" accept="image/*">
+            </div>
+        </div>
+
+        <br><br>
+    </div>
+    <div class="profile-info" *ngIf="user.name">
+        <br>
+        <div class="input-group input-group-dynamic mb-6">
+            <input class="form-control" aria-label="First Name..." type="text" autocomplete="off" placeholder="Nom" [(ngModel)]="user.name">
+        </div>
+        <br>        
+        <button (click)="update_membre()">Save</button>
+    </div>
+    <div class="profile-actions">
+        <a href="javascript:;" class="text-info icon-move-right" (click)="HideShowInfo()" >
+             <i class="fas fa-arrow-left text-sm ms-1"></i> &nbsp; Back
+        </a>
+        <br><br>
+
+    </div>
+</div>
+
+<div class="profile-container"  *ngIf="showpwd">
+
+    <p class="blocq">🔒</p>
+  
+
+    <div class="input-group input-group-dynamic editPwd">
+        <input class="form-control" aria-label="First Name..." type="password" autocomplete="off" placeholder="Your password" [(ngModel)]="passwordOld">
+        <br><br><br>
+        <input class="form-control" aria-label="First Name..." type="password" autocomplete="off" placeholder="New password" [(ngModel)]="passwordNew">
+<br>
+        <input class="form-control" aria-label="First Name..." type="password" autocomplete="off" placeholder="Confirm new password" [(ngModel)]="passwordNewConf">
+        <div class="profile-info"  > 
+            <br>
+            <button (click)="updatePwd()">Reset</button>
+        </div>
+    </div>
+
+
+    <div class="profile-actions">
+        <a href="javascript:;" class="text-info icon-move-right" (click)="HideShowPwd()" >
+             <i class="fas fa-arrow-left text-sm ms-1"></i> &nbsp; Back
+        </a>
+        <br><br>
+
+    </div>
+</div>
+
+<div class="profile-container"  *ngIf="showEmail">
+
+    <p class="blocq">✉️</p>
+  
+
+    <div class="input-group input-group-dynamic editEmail">
+ 
+        <input class="form-control" aria-label="First Name..." type="email" autocomplete="off" placeholder="Email" [(ngModel)]="Email">
+        <div class="profile-info"  > 
+            <br>
+            <button (click)="update_membre()">Add email</button>
+        </div>
+    </div>
+
+
+    <div class="profile-actions">
+        <a href="javascript:;" class="text-info icon-move-right" (click)="HideShowPwd()" >
+             <i class="fas fa-arrow-left text-sm ms-1"></i> &nbsp; Back
+        </a>
+        <br><br>
+
+    </div>
+</div>

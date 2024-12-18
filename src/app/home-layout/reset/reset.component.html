@@ -1,0 +1,18 @@
+<div class="profile-container"  >
+
+    <p class="blocq">🔒</p>
+  
+
+    <div class="input-group input-group-dynamic editPwd">
+
+        <input class="form-control" aria-label="First Name..." type="password" autocomplete="off" placeholder="New password" [(ngModel)]="passwordNew">
+        <br><br>
+        <input class="form-control" aria-label="First Name..." type="password" autocomplete="off" placeholder="Confirm new password" [(ngModel)]="passwordNewConf">
+        <div class="profile-info"  > 
+            <br>
+            <button (click)="updatePwd()">Save</button>
+        </div>
+    </div>
+
+
+</div>

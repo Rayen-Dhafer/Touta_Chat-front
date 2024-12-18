@@ -1,0 +1,42 @@
+.toast-success {
+    background-color: #4CAF50 !important; /* Example green color */
+    color: white !important;
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px 15px; /* Padding inside the toast */
+    font-size: 16px; /* Font size */
+    font-weight: bold; /* Bold text */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  }
+  
+  /* Error Toast */
+  .toast-error {
+    background-color: #F44336 !important; /* Example red color */
+    color: white !important;
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px 15px; /* Padding inside the toast */
+    font-size: 16px; /* Font size */
+    font-weight: bold; /* Bold text */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  }
+  
+  /* Info Toast */
+  .toast-info {
+    background-color: #2196F3 !important; /* Blue color */
+    color: white !important;
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px 15px; /* Padding inside the toast */
+    font-size: 16px; /* Font size */
+    font-weight: bold; /* Bold text */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  }
+  
+  /* Warning Toast */
+  .toast-warning {
+    background-color: #FFC107 !important; /* Yellow color */
+    color: black !important;
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px 15px; /* Padding inside the toast */
+    font-size: 16px; /* Font size */
+    font-weight: bold; /* Bold text */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  }
