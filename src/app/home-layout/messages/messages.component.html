@@ -152,7 +152,7 @@
 
             
 
-        <div *ngIf=" selectedUser.id!= 'ToutBot'; else chatIA">
+        <div *ngIf=" messages">
                 <div class="message" *ngFor="let message of messages.reverse()"
                     [ngClass]="{'received': message.senderId == selectedUser.id, 'sent': message.senderId != selectedUser.id}"
                     (click)="selectedMessage = selectedMessage === message ? null : message"  (mouseleave)="selectedMessage = ''">
@@ -208,7 +208,7 @@
         <button class="more-btn" (click)="MoreMessages()"> <i class="fas fa-chevron-up"></i>       </button>
        </div>
        <ng-template #noMore>
-        <br><br><br><br> <br><br> <img src="img4.png" alt="Logo" class="noMoreMsg" *ngIf="selectedUser.name != 'ToutBot'" >  
+        <br><br><br><br> <br><br> <img src="img4.png" alt="Logo" class="noMoreMsg"   >  
 
        </ng-template>
        
@@ -216,7 +216,7 @@
    
         </div>
    
-        <div class="chat-input" *ngIf="selectedUser.id !== 'ToutBot'; else TchatterSend">
+        <div class="chat-input"  >
             <!-- Attach Button -->
             <button class="attach-btn" (click)="onAttachClick()">
                 <i class="fas fa-paperclip"></i>
@@ -236,7 +236,7 @@
             <input type="file" id="file-input" (change)="onFileSelected($event)" style="display:none;">
         
             <!-- Text Message Input -->
-            <input *ngIf="!Mypath; else sendimg" 
+            <input *ngIf="Mypath == ''; else sendimg" 
                    type="text" 
                    placeholder="Type a message" 
                    [(ngModel)]="newMessage" 

@@ -118,7 +118,7 @@ export class AccountComponent {
 
 
 update_membre(){
-  let body = {  name: this.user.name ,photoProfile: this.user.photoProfile , token: this.token, email: this.Email }
+  let body = {  name: this.user.name ,photoProfile: this.user.photoProfile , token: this.token }
   this.api.updateUser(body).subscribe((response: any) => {  
       
       if (response.success) {
@@ -133,6 +133,28 @@ update_membre(){
     }
   );
 }
+
+
+update_email(){
+  let body = {  token: this.token, email: this.Email }
+  this.api.updateEmail(body).subscribe((response: any) => {  
+      
+      if (response.success) {
+        this.toastr.success('Updated successfully!', '', { positionClass: 'toast-top-right' });
+
+        this.showInfo= false
+      } 
+    },
+    (error: any) => {
+     
+      this.toastr.error('Error', '', { positionClass: 'toast-top-right' });
+    }
+  );
+}
+
+
+
+
 
 
 triggerFileInput(): void {

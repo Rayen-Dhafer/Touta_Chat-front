@@ -83,104 +83,41 @@ export class MessagesComponent implements OnInit {
   isEmojiPickerVisible: boolean = false;
   ngOnInit(): void {
 
-    this.messagesIA.push({ role: 'user', content: 'hi' });
-    this.messagesIA.push({ role: '"assistant"', content: 'Hello! How can I assist you today?' });
-    this.messagesIA.push({ role: 'user', content: 'give me code html login simple' });
-    this.messagesIA.push({ role: '"assistant"', content:  `
-      Sure! Here is a simple HTML login form:
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Login</title>
-</head>
-<body>
-	<form action="login.php" method="post">
-		<label for="username">Username:</label>
-		<input type="text" id="username" name="username"><br><br>
-		<label for="password">Password:</label>
-		<input type="password" id="password" name="password"><br><br>
-		<input type="submit" value="Login">
-	</form>
-</body>
-</html>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Login</title>
-	<style>
-		body {
-			background-color: #f2f2f2;
-		}
-		.login-form {
-			width: 300px;
-			margin: 50px auto;
-			padding: 20px;
-			background-color: #fff;
-			border: 1px solid #ddd;
-			border-radius: 10px;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-		}
-		.login-form label {
-			display: block;
-			margin-bottom: 10px;
-		}
-		.login-form input[type="text"], .login-form input[type="password"] {
-			width: 100%;
-			height: 40px;
-			margin-bottom: 20px;
-			padding: 10px;
-			border: 1px solid #ccc;
-			border-radius: 5px;
-		}
-		.login-form input[type="submit"] {
-			width: 100%;
-			height: 40px;
-			background-color: #4CAF50;
-			color: #fff;
-			padding: 10px;
-			border: none;
-			border-radius: 5px;
-			cursor: pointer;
-		}
-		.login-form input[type="submit"]:hover {
-			background-color: #3e8e41;
-		}
-	</style>
-</head>
-<body>
-	<div class="login-form">
-		<form action="login.php" method="post">
-			<label for="username">Username:</label>
-			<input type="text" id="username" name="username"><br><br>
-			<label for="password">Password:</label>
-			<input type="password" id="password" name="password"><br><br>
-			<input type="submit" value="Login">
-		</form>
-	</div>
-</body>
-</html>
 
       
       
-      `});
+      
 
     
-    let  id_contac= this.getselectedUserFromCookies();
-    this.url= this.api.url
+     this.url= this.api.url
     const body = { token: this.token };
 
     this.api.getAllconversation(body).subscribe(
       (response: any) => {
 
         this.id = response.senderId
-        this.filteredProblems = response.conversations;
+        
+        this.socket.on('connect', () => {
+          this.socket.emit('joinRoom', response.senderId, (response: { success: boolean, message: string }) => {
+            console.log(response.success);
+            // If not successful, keep trying
+            if (response.success !== true) {
+              this.tryJoinRoom(this.id); // Recursively call the function
+            }
+          });
+        });
+        
+        // Recursive function to handle room joining
+
+
+         this.filteredProblems = response.conversations;
         this.users = response.conversations;
 
 
        
-        if (id_contac == null || id_contac == undefined || id_contac == '') {
+        if (this.selectedUser.id == null || this.selectedUser.id == undefined || this.selectedUser.id == '') {
           
         }else {
           this.select(this.selectedUser.id)
@@ -192,15 +129,12 @@ export class MessagesComponent implements OnInit {
 
     
 
-    this.socket.on('connect', () => {
-      this.socket.emit('joinRoom', this.id, (response: JoinRoomResponse) => {
- 
-      });
-    });
+
 
 
     
     this.socket.on('you_send_new_message', (data: any) => {
+ 
       this.api.getAllconversation(body).subscribe(
         (response: any) => {
   
@@ -208,14 +142,12 @@ export class MessagesComponent implements OnInit {
           this.filteredProblems = response.conversations;
           this.users = response.conversations;
   
-           if (id_contac == null || id_contac == undefined || id_contac == '') {
+ 
             
-          }else {
-            this.select(this.selectedUser.id)
             this.playSound('send_msg.mp3');
   
 
-          }
+ 
         },
         (error: any) => {
         }
@@ -229,7 +161,7 @@ export class MessagesComponent implements OnInit {
     
             this.filteredProblems = response.conversations;
             this.users = response.conversations;
-            if(id_contac == data.id ){
+            if(this.selectedUser.id == data.id ){
               this.select(this.selectedUser.id)
             }
           },
@@ -238,6 +170,7 @@ export class MessagesComponent implements OnInit {
         );});
 
       this.socket.on('new_message_to_you', (data: any) => {
+        
         this.api.getAllconversation(body).subscribe(
           (response: any) => {
     
@@ -245,7 +178,8 @@ export class MessagesComponent implements OnInit {
             this.filteredProblems = response.conversations;
             this.users = response.conversations;
     
-             if (id_contac == null || id_contac == undefined || id_contac == '') {
+
+            if (this.selectedUser.id == null || this.selectedUser.id == undefined || this.selectedUser.id == '') {
               
             }else {
               this.select(this.selectedUser.id)
@@ -264,7 +198,7 @@ export class MessagesComponent implements OnInit {
               this.filteredProblems = response.conversations;
               this.users = response.conversations;
       
-               if (id_contac == null || id_contac == undefined || id_contac == '') {
+               if (this.selectedUser.id == null || this.selectedUser.id == undefined || this.selectedUser.id == '') {
                 
               }else {
                 this.select(this.selectedUser.id)
@@ -282,7 +216,7 @@ export class MessagesComponent implements OnInit {
                 this.filteredProblems = response.conversations;
                 this.users = response.conversations;
         
-                 if (id_contac == null || id_contac == undefined || id_contac == '') {
+                 if (this.selectedUser.id == null || this.selectedUser.id == undefined || this.selectedUser.id == '') {
                   
                 }else {
                   this.select(this.selectedUser.id)
@@ -300,7 +234,7 @@ export class MessagesComponent implements OnInit {
                   this.filteredProblems = response.conversations;
                   this.users = response.conversations;
           
-                   if (id_contac == null || id_contac == undefined || id_contac == '') {
+                   if (this.selectedUser.id == null || this.selectedUser.id == undefined || this.selectedUser.id == '') {
                     
                   }else {
                     this.select(this.selectedUser.id)
@@ -324,7 +258,17 @@ export class MessagesComponent implements OnInit {
   
 
 
-
+   tryJoinRoom(id:any) {
+    this.socket.emit('joinRoom', id, (response: { success: boolean, message: string }) => {
+      console.log(response.success);
+      if (response.success !== true) {
+        // If not successful, retry after a short delay
+        setTimeout(() => this.tryJoinRoom(id), 1000); // Retry after 1 second
+      } else {
+        console.log('Successfully joined the room');
+      }
+    });
+  }
 
 
   playSound(sound:any): void {
@@ -419,7 +363,7 @@ export class MessagesComponent implements OnInit {
 
   sendMessage() {
 
- if(this.selectedUser.id!= 'ToutBot'){
+
     if( this.Mypath!="" ){
       let body = { token: this.token, message: null, messageType: "media", mediaUrl: this.Mypath, userId: this.selectedUser.id }
 
@@ -438,31 +382,14 @@ export class MessagesComponent implements OnInit {
     this.api.sendMsg(body).subscribe(
       (response: any) => {
           this.newMessage = '';
+          this.select(this.selectedUser.id)
       },
       (error: any) => {
         console.log(error);
       }
     );
   }
-    }else{
     
-      this.messagesIA.push({ role: 'user', content: this.newMessage });
-      this.isLoadingIA = true;
-      this.newMessage = '';
-      this.api.sendMessageIA(this.messagesIA).subscribe(
-        (response: any) => {
-          const botReply = response.choices[0].message.content
-          this.messagesIA.push({ role: 'assistant', content: botReply });
-          this.isLoadingIA = false;
-            
-            console.log(this.messagesIA)
-        },
-        (error: any) => {
-          console.log(error);
-        }
-      );
-
-    }
 
 }
 
@@ -513,15 +440,15 @@ export class MessagesComponent implements OnInit {
 
     this.api.getConversation(body).subscribe(
       (response: any) => {
-        console.log("rr",response)
-        this.selectedUser = response.user;
-        this.messages = response.messages;
-        this.hasMoreMessages = response.hasMoreMessages;
 
+        this.select(response.user.id)
+        console.log("rr",response.user.id)
+ 
         this.searchTerm = '';
         this.showIcon = false;
         this.filteredProblems = this.users
-        document.cookie = `selectedUser=${response.user.id}; path=/;`;
+        this.messages = null
+
 
       },
       (error: any) => {
@@ -532,8 +459,7 @@ export class MessagesComponent implements OnInit {
 
 
   select(id:any) {
-    if(id!="ToutBot"){
-
+ 
     const body = { token: this.token, userId : id , numMsg:this.numMsg};
 
     this.api.getConversation(body).subscribe(
@@ -541,27 +467,14 @@ export class MessagesComponent implements OnInit {
  
         this.selectedUser = response.user;
         this.messages = response.messages;
-        this.hasMoreMessages = response.hasMoreMessages;
+         this.hasMoreMessages = response.hasMoreMessages;
         document.cookie = `selectedUser=${response.user.id}; path=/;`;
 
       },
       (error: any) => {
       }
     );
-    }else{
-      const user= {
-        id: "ToutBot",
-        name: "ToutBot",
-        phone: null,
-        countryCode: null,
-        photoProfile: "Tchatter.jpg",
-        typing: false  
-      }
-      document.cookie = `selectedUser=${id}; path=/;`;
-      this.messages = null;
-
-      this.selectedUser = user;
-    }
+    
   }
 
  MoreMessages( ) {

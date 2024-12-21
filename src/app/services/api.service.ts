@@ -17,7 +17,7 @@ export class ApiService {
   sendLinkReset(body :any){  return this.http.post(`${this.url}api/sendLinkReset` , body)   }
   SendRestCode(body :any){  return this.http.post(`${this.url}api/SendRestCode` , body)   }
 
-
+  updateEmail(body :any){  return this.http.post(`${this.url}api/updateEmail` , body)   }
   updateUser(body :any){  return this.http.post(`${this.url}api/updateUser` , body)   }
   updatePwd(body :any){  return this.http.post(`${this.url}api/updatePwd` , body)   }
   upload(body : any){
@@ -35,13 +35,15 @@ export class ApiService {
 
 
 
-  private apiUrl = 'https://meta-llama-3-1-405b1.p.rapidapi.com/chat'; // Replace with actual endpoint URL
+  private apiUrl = 'https://meta-llama-2-ai.p.rapidapi.com/'; // Replace with actual endpoint URL
+ 
+
  
 
   sendMessageIA(messages: any): any {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'X-RapidAPI-Host': 'meta-llama-3-1-405b1.p.rapidapi.com',
+      'X-RapidAPI-Host': 'meta-llama-2-ai.p.rapidapi.com',
       'X-RapidAPI-Key': '200a855f73mshed391d682487fd9p1ae033jsn82cfa5956ee3'
     });
 
