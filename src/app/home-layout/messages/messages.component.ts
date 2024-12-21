@@ -47,7 +47,7 @@ export class MessagesComponent implements OnInit {
   isSidebarVisible: boolean = true;
   token= localStorage.getItem("token")
   messages: any; 
-  users: User[] = [];  
+   users: User[] = [];  
   selectedUser: any;
   selectedMessage: any = null;  
   filteredProblems: User[] = [];  
@@ -58,7 +58,7 @@ export class MessagesComponent implements OnInit {
   numMsg=20
   hasMoreMessages:any
   messagesIA: Array<{ role: string; content: string }> = [];
-
+  langTrans="Original"
 
 
  
@@ -467,6 +467,7 @@ export class MessagesComponent implements OnInit {
  
         this.selectedUser = response.user;
         this.messages = response.messages;
+ 
          this.hasMoreMessages = response.hasMoreMessages;
         document.cookie = `selectedUser=${response.user.id}; path=/;`;
 
@@ -562,11 +563,38 @@ addEmoji(emoji: string) {
 
 
 
+changeLanguage(id:any): void {
+   const selectElement = document.getElementById('language') as HTMLSelectElement;
+
+    if(selectElement.value != "Original"){
+
+          for (let i = 0; i < this.messages.length; i++) {
+        
+            if( this.messages[i].messageType ==  "text"){
+      
+      
+              this.api.transmsg(this.messages[i].message,  selectElement.value).subscribe(
+                (response: any) => {
+                  this.messages[i].message= response.translatedText     }
+              );
+            }
+          }
+  
+    }else{
+ 
+ this.select(id)
+
+    }
+ 
 
 
+ 
 
 
+}
 
+
+ 
 
 
 

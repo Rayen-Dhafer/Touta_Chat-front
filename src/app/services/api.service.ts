@@ -36,7 +36,8 @@ export class ApiService {
 
 
   private apiUrl = 'https://meta-llama-2-ai.p.rapidapi.com/'; // Replace with actual endpoint URL
- 
+  private apiUrlTrans = 'https://openl-translate.p.rapidapi.com/translate'; // URL for the translation API
+
 
  
 
@@ -53,6 +54,31 @@ export class ApiService {
 
     return this.http.post(this.apiUrl, body, { headers });
   }
+
+
+
+ 
+
+
+  transmsg(msg: string, tar:any):  any {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-rapidapi-host': 'openl-translate.p.rapidapi.com',
+      'x-rapidapi-key': '200a855f73mshed391d682487fd9p1ae033jsn82cfa5956ee3' 
+
+    });
+
+
+ 
+    const body = {
+      target_lang: tar,
+      text: msg
+         }
+
+         return this.http.post(this.apiUrlTrans, body, { headers });
+     
+  }
+
 
   createNewChat(body :any){  return this.http.post(`${this.url}api/createNewChat` , body)   }
   getAllChat(body :any){  return this.http.post(`${this.url}api/getAllChat` , body)   }

@@ -132,6 +132,18 @@
                     <h6>{{selectedUser.countryCode}}{{selectedUser.phone}}</h6>
                 </div>
             </div>
+
+            <div class="language-selector">
+                 <select id="language" name="language" (change)="changeLanguage(selectedUser.id)">
+                  <option value="Original"   selected>Original</option>
+                  <option value="ar" data-language="العربية">العربية</option>
+                  <option value="en" data-language="English">English</option>
+                  <option value="fr" data-language="Français">Français</option>
+                  <option value="es" data-language="Español">Español</option>
+                  <option value="de" data-language="Deutsch">Deutsch</option>
+                </select>
+ 
+              </div>
             <div class="chat-actions">
                 <button *ngIf="selectedUser.id!= 'ToutBot'" class="call-btn"><i class="fas fa-phone-alt"></i></button>
                 <button *ngIf="selectedUser.id!= 'ToutBot'" class="video-btn"><i class="fas fa-video"></i></button>
@@ -157,8 +169,10 @@
                     [ngClass]="{'received': message.senderId == selectedUser.id, 'sent': message.senderId != selectedUser.id}"
                     (click)="selectedMessage = selectedMessage === message ? null : message"  (mouseleave)="selectedMessage = ''">
                 <div class="message-content" *ngIf="message.message; else media">
-                    <p>{{message.message}}</p>
-                    
+
+                    <p   >{{message.message}}</p>
+
+
                     <span class="timestamp"
                         [ngClass]="{'timestamp-right': message.senderId == selectedUser.id, 
                                     'timestamp-left': message.senderId != selectedUser.id}"
